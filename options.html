@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>QuickSnap Options</title>
+  <style>
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+      padding: 16px;
+      background-color: #222222;
+      color: #dddddd;
+    }
+    h2 {
+      margin-bottom: 24px;
+      font-size: 24px;
+    }
+    label {
+      display: block;
+      margin: 8px 0;
+      font-size: 16px;
+      cursor: pointer;
+    }
+    .settings-wrapper {
+      max-width: 400px;
+      margin: auto;
+      padding: 32px;
+      border: 1px solid #444444;
+      border-radius: 8px;
+      background-color: #333333;
+    }
+    .checkbox {
+      margin-right: 8px;
+      width: 16px;
+      height: 16px;
+      vertical-align: middle;
+    }
+    
+    button {
+      margin-top: 16px;
+      padding: 8px 16px;
+      background-color: #007bff;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #0056b3;
+    }
+    .footer-section{
+        position: fixed;
+        bottom: 0;
+        display: flex;
+        align-items: center;
+        width: 100%;
+        padding: 16px 0px;
+        font-size: 16px;
+    }
+
+    .footer-item {
+        margin-left: 16px;
+        color: #777777;
+        text-decoration: none;
+    }
+
+    .footer-item:hover {
+        color: #999999;
+    }
+  </style>
+</head>
+<body>
+  <div class="settings-wrapper">
+    <h2>QuickSnap Settings</h2>
+    <label>
+      <input type="checkbox" class="checkbox" id="download"> Enable Download
+    </label>
+    <label>
+      <input type="checkbox" class="checkbox" id="copy"> Enable Copy to Clipboard
+    </label>
+    <button id="save">Save Settings</button>
+  </div>
+
+  <div class="footer-section">
+      <a target="_blank" href="https://forms.gle/3qgtDua2EsbJe4Tp7" class="feedback-section footer-item">
+          Report and Feedback
+      </a>
+      <!-- <a href="#" class="support footer-item">
+          Support
+      </a> -->
+  </div>
+
+  <script src="options.js"></script>
+</body>
+</html>

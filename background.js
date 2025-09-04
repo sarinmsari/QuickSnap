@@ -42,26 +42,27 @@ chrome.action.onClicked.addListener((tab) => {
 
       if (dataUrl) {
         const filename = `youtube-frame-${Date.now()}.png`;
-        afterCapture(dataUrl,filename)
+        afterCapture(dataUrl,filename,tab.id)
       } else {
         // fallback if no video found
-        takeFullTabScreenshot(tab.windowId);
+        takeFullTabScreenshot(tab);
       }
     });
   } else {
     // For all other sites → full tab screenshot
-    takeFullTabScreenshot(tab.windowId);
+    takeFullTabScreenshot(tab);
   }
 });
 
-function takeFullTabScreenshot(windowId) {
-  chrome.tabs.captureVisibleTab(windowId, { format: "png" }, (dataUrl) => {
+function takeFullTabScreenshot(tab) {
+  chrome.tabs.captureVisibleTab(tab.windowId, { format: "png" }, (dataUrl) => {
     if (chrome.runtime.lastError) {
       console.error(chrome.runtime.lastError.message);
       return;
     }
     const filename = `screenshot-${Date.now()}.png`;
-    afterCapture(dataUrl,filename)
+    
+    afterCapture(dataUrl,filename,tab.id)
   });
 }
 
@@ -84,12 +85,23 @@ function captureYouTubeFrame() {
   return canvas.toDataURL("image/png");
 }
 
-function afterCapture(dataUrl,filename) {
-    chrome.downloads.download({
-        url: dataUrl,
-        filename: filename
-    });
-    copyImageToClipboard(dataUrl);
+function afterCapture(dataUrl,filename,tabId) {
+  chrome.storage.sync.get(["download", "copy"], async (settings) => {
+    const { download, copy } = settings;
+    if (download) {
+      chrome.downloads.download({
+          url: dataUrl,
+          filename: filename
+      });
+    }
+    if (copy) {
+      chrome.scripting.executeScript({
+        target: { tabId: tabId },
+        func: copyImageToClipboard,
+        args: [dataUrl]
+      });
+    }
+  });
 }
 
 async function copyImageToClipboard(dataUrl) {

@@ -1,13 +1,14 @@
 {
   "manifest_version": 3,
   "name": "QuickSnap",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Capture anything — YouTube moments or whole tabs — snap quickly, save effortlessly, paste seamlessly.",
   "permissions": [
     "tabs",
     "activeTab",
     "downloads",
-    "scripting"
+    "scripting",
+    "storage"
   ],
   "background": {
     "service_worker": "background.js"
@@ -24,5 +25,6 @@
     "16": "icons/icon16.png",
     "48": "icons/icon48.png",
     "128": "icons/icon128.png"
-  }
+  },
+  "options_page": "options.html"
 }
