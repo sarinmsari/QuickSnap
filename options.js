@@ -5,7 +5,6 @@ document.addEventListener("DOMContentLoaded", async () => {
 
   // Load saved settings
   chrome.storage.sync.get(["download", "copy"], (data) => {
-    console.log(data);
     downloadCheckbox.checked = data.download ?? true; // default enabled
     copyCheckbox.checked = data.copy ?? true; // default enabled
   });

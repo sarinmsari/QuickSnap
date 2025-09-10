@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
   "name": "QuickSnap",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Capture anything — YouTube moments or whole tabs — snap quickly, save effortlessly, paste seamlessly.",
   "permissions": [
     "tabs",

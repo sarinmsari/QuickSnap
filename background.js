@@ -1,3 +1,23 @@
+chrome.runtime.onInstalled.addListener(() => {
+  // Set default settings on install
+  chrome.storage.sync.set({
+    download: true,
+    copy: true
+  });
+});
+
+chrome.runtime.onStartup.addListener(() => {
+  // Ensure settings exist on startup
+  chrome.storage.sync.get(["download", "copy"], (data) => {
+    if (!data?.download) {
+      chrome.storage.sync.set({ download: true });
+    }
+    if (!data?.copy) {
+      chrome.storage.sync.set({ copy: true });
+    }
+  });
+});
+
 // Listen whenever the active tab changes
 chrome.tabs.onActivated.addListener(({ tabId }) => {
   updateActionTitle(tabId);
